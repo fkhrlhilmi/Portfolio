@@ -1,0 +1,498 @@
+/* === PAGE BACKGROUND =========================== */
+body {
+    filter: contrast(1.05) saturate(1.1);
+    margin: 0;
+    padding: 0;
+    background: #000; /* fallback */
+
+    overflow-y: auto;   /* allows vertical scrolling */
+    overflow-x: hidden; /* prevents sideways scroll */
+
+
+}
+
+/* center everything like old personal pages */
+.page-wrapper {
+    width: 900px;
+    margin: 0 auto;
+    padding-top: 20px;
+}
+
+
+
+
+
+
+
+/* === RETRO NAVBAR =============================== */
+.nav-bar {
+    display: flex;
+    justify-content: space-around;
+    background-color: #d6d6d6;
+    border: 2px solid #000;
+    padding: 8px;
+    margin-bottom: 15px;
+}
+
+.nav-bar a {
+    text-decoration: none;
+    color: #000;
+    font-weight: bold;
+}
+
+.nav-bar a:hover {
+    background-color: #000;
+    color: #fff;
+}
+
+/* === WINDOW STYLE =============================== */
+.window {
+    border: 3px solid #000;
+    background-color: #ffffff;
+}
+
+.window-title {
+    background-color: #0000aa;
+    color: white;
+    padding: 6px 10px;
+    font-weight: bold;
+    border-bottom: 3px solid #000;
+    font-family: "MS Sans Serif", sans-serif;
+}
+
+.window-content {
+    padding: 15px;
+}
+
+/* === PFP IMAGE ================================= */
+.pfp-block img {
+    width: 240px;
+    height: 250px;
+    border: 3px solid #000;
+    margin-bottom: 10px;
+}
+
+/* === HEADINGS ================================= */
+.page-title {
+    font-family: "Verdana";
+    font-size: 22px;
+    margin-bottom: 10px;
+}
+
+/* === SCROLL BOX ====================================== */
+.scroll-box {
+    max-height: 300px;
+
+    border: 2px solid #000;
+    padding: 0 10px 10px 10px; /* no top padding */
+
+    margin: 10px 0;
+    background-color: #f4f4f4;
+
+    overflow-y: scroll;
+    overflow-x: auto;
+
+    white-space: normal;
+    line-height: 1.4rem;
+}
+
+.scroll-box p:first-child {
+    margin-top: 5px; /* remove the gap at the top */
+}
+
+.scroll-box p {
+    margin-bottom: 8px; /* smaller spacing between lines */
+}
+
+.scroll-box ul {
+    padding-left: 20px;   /* indents list items */
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.scroll-box li {
+    line-height: 1.4rem;
+}
+
+.scroll-box::-webkit-scrollbar {
+    width: 14px;
+    background: #d6d6d6;
+    border-left: 2px solid #000;
+}
+.scroll-box::-webkit-scrollbar-thumb {
+    background: #888;
+    border: 2px solid #000;
+}
+
+/* === PROJECTS SCROLLBOX ======================== */
+/* Flex container for left/right projects with vertical divider */
+.scrollbox-projects {
+
+    cursor: default;
+    max-height: 400px;  /* bigger than regular scroll-box */
+    
+    border: 2px solid #000;
+    padding: 0 10px 10px 10px;
+    margin: 10px 0;
+    background-color: #f4f4f4;
+
+    overflow-y: scroll;
+    overflow-x: auto;
+
+    white-space: normal;
+    line-height: 1.4rem;
+}
+
+/* same paragraph/list styles as scroll-box */
+.scrollbox-projects p:first-child {
+    margin-top: 5px;
+}
+
+.scrollbox-projects p {
+    margin-bottom: 8px;
+}
+
+.scrollbox-projects ul {
+    padding-left: 20px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.scrollbox-projects li {
+    line-height: 1.4rem;
+}
+
+/* make the scrollbar same as .scroll-box */
+.scrollbox-projects::-webkit-scrollbar {
+    width: 14px;
+    background: #d6d6d6;
+    border-left: 2px solid #000;
+}
+
+.scrollbox-projects::-webkit-scrollbar-thumb {
+    background: #888;
+    border: 2px solid #000;
+}
+
+
+
+
+
+
+
+
+
+/* === JAPANESE SECTION ========================== */
+.jp-section h2 {
+    font-size: 18px;
+}
+
+/* === VHS / CRT EFFECT ========================== */
+
+.crt-overlay {
+    pointer-events: none;
+    position: fixed;
+    inset: 0;
+    z-index: 999;
+    
+    /* transparent scanlines */
+    background: repeating-linear-gradient(
+        to bottom,
+        rgba(0,0,0,0.08) 0px,
+        rgba(0,0,0,0.08) 1px,
+        rgba(0,0,0,0) 3px
+    );
+
+    animation: flicker 999.999s infinite;
+}
+
+@keyframes flicker {
+    0%   { opacity: 0.92; }
+    50%  { opacity: 0.96; }
+    100% { opacity: 0.92; }
+}
+
+.crt {
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+    overflow: hidden;
+
+    /* --- Soft Trinitron curvature --- */
+    border-radius: 40px;
+    transform: perspective(1200px) scale(1) rotateX(0.5deg) rotateY(0.3deg);
+
+    /* Inner tube glow + curved corners */
+    box-shadow:
+        inset 0 0 120px rgba(0,0,0,0.45),
+        inset 0 0 40px rgba(0,0,0,0.35),
+        0 0 80px rgba(0,0,0,0.5);
+}
+
+/* Horizontal scrolling GIF */
+.bg-loop {
+    display: flex;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 300%;        /* 2 copies of the GIF */
+    height: 100%;
+    z-index: -1;        /* behind content */
+    animation: scroll-bg 30s linear infinite;
+}
+
+.bg-loop img {
+    width: 50%;         /* each image takes half the container */
+    height: 100%;
+}
+
+/* Animate horizontal scroll */
+@keyframes scroll-bg {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); } /* scroll left by one GIF width */
+}
+
+/* CRT overlay */
+.crt-overlay {
+    pointer-events: none;
+    position: fixed;
+    inset: 0;
+    z-index: 999;
+
+    background: repeating-linear-gradient(
+        to bottom,
+        rgba(0,0,0,0.08) 0px,
+        rgba(0,0,0,0.08) 1px,
+        rgba(0,0,0,0) 3px
+    );
+
+    animation: flicker 0.15s infinite;
+}
+
+@keyframes flicker {
+    0%   { opacity: 0.92; }
+    50%  { opacity: 0.96; }
+    100% { opacity: 0.92; }
+}
+
+
+
+.scrollbox-projects {
+    max-height: 400px;  /* can scroll if content overflows */
+    border: 2px solid #000;
+    padding: 10px;
+    margin: 10px 0;
+    background-color: #f4f4f4;
+    overflow-y: scroll;
+    overflow-x: auto;
+    line-height: 1.4rem;
+    font-family: "Verdana", sans-serif;
+}
+
+/* Flex container for project cards */
+.projects-section {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+/* Each project card */
+.project-card {
+    flex: 1;
+    border: 2px solid #000;
+    background-color: #ffffff;
+    padding: 10px;
+    text-align: center;
+    cursor: default;
+    position: relative;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Retro shadow/glow effect for hover */
+.project-card:hover {
+    box-shadow: 0 0 20px #2d99ffa8, inset 0 0 10px #0084ff;
+}
+
+/* Image container */
+.project-image img {
+    width: 300px;
+    height: auto;
+    transition: transform 0.3s ease;
+    display: block;
+    margin: 0 auto;
+}
+
+/* Hover: enlarge + shake */
+.project-card:hover .project-image img {
+    transform: scale(1.05);
+    animation: shake 0.5s;
+}
+
+/* Shake keyframes */
+@keyframes shake {
+    0% { transform: scale(1.05) translateX(0); }
+    25% { transform: scale(1.05) translateX(-3px); }
+    50% { transform: scale(1.05) translateX(3px); }
+    75% { transform: scale(1.05) translateX(-3px); }
+    100% { transform: scale(1.05) translateX(0); }
+}
+
+/* Project text */
+.project-text h3 {
+    font-size: 16px;
+    margin: 8px 0 5px 0;
+}
+
+.project-text p {
+    font-size: 14px;
+    line-height: 1.4rem;
+}
+
+
+/* Scanlines */
+.crt::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: repeating-linear-gradient(
+        to bottom,
+        rgba(255,255,255,0.05) 0px,
+        rgba(255,255,255,0.05) 2px,
+        rgba(0,0,0,0) 2px,
+        rgba(0,0,0,0) 4px
+    );
+    mix-blend-mode: overlay;
+}
+
+/* Trinitron aperture grille */
+.crt .grille {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+
+    background: repeating-linear-gradient(
+        to right,
+        rgba(255, 100, 100, 0.08) 0px,
+        rgba(255, 100, 100, 0.08) 1px,
+        rgba(100, 255, 100, 0.08) 1px,
+        rgba(100, 255, 100, 0.08) 2px,
+        rgba(100, 100, 255, 0.08) 2px,
+        rgba(100, 100, 255, 0.08) 3px,
+        rgba(0,0,0,0) 3px,
+        rgba(0,0,0,0) 4px
+    );
+
+    mix-blend-mode: screen;
+    opacity: 0.15;
+}
+
+/* Layout: PFP beside text */
+.pfp-row {
+    display: flex;
+    gap: 20px;            /* spacing between pfp and text */
+    margin-bottom: -30px;
+}
+
+.pfp-text {
+    position: relative;
+    top: 0px; /* adjust this number: -5px, -15px, etc */
+}
+
+/* === ASCII ART STYLE ========================== */
+.ascii-art {
+    font-family: monospace;
+    font-size: 13px;
+    line-height: 1.1;
+    margin-top: 100px;
+    margin-top: -15px; /* adjust: -5px, -10px, -20px */
+}
+
+
+.pfp-text .page-title {
+    font-size: 40px;
+    margin-top: 0;
+    margin-bottom: 5px;
+}
+
+/* === ARTWORK GRID ======================== */
+.art-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.art-item {
+    border: 2px solid #000;
+    background: #fff;
+    padding: 8px;
+    text-align: center;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.art-item img {
+    width: auto !important;
+    max-width: none !important;
+    height: auto;
+}
+
+/* hover glow + slight bump */
+.art-item:hover {
+    transform: scale(1.03);
+    box-shadow: 0 0 12px #0099ff;
+}
+
+
+#floating-character {
+    position: fixed; /* stays in place */
+    bottom: 20px;    /* distance from bottom */
+    left: 20px;      /* changed from right: 20px; */
+    width: 80px;     
+    z-index: 9999;   
+    pointer-events: none; 
+    animation: floatUpDown 3s ease-in-out infinite;
+}
+
+
+@keyframes floatUpDown {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-15px); } /* float up */
+}
+
+.window-title {
+    display: flex;
+    justify-content: space-between; /* pushes the X to the far right */
+    align-items: center;
+    padding: 5px 10px;
+    background-color: #0300aa; /* dark CRT title bar */
+    color: #fff;
+    font-family: 'Courier New', monospace;
+    font-weight: bold;
+    border-bottom: 2px solid #555;
+    position: relative;
+}
+
+.close-btn {
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    line-height: 22px;
+    text-align: center;
+    color: #000000; /* retro red X */
+    font-weight: bold;
+    font-size: 1.2em;
+    text-decoration: none;
+    background-color: #e2e2e2;
+    border: 1px solid #555;
+    border-radius: 3px;
+    cursor: pointer;
+    user-select: none;
+    transition: all 0.2s;
+}
+
+.close-btn:hover {
+    background-color: #ff4242;
+    color: #fff;
+    transform: scale(1.2);
+}
+

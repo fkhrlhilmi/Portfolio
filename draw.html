@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Draw</title>
+<style>
+body {
+    margin: 0;
+    overflow: hidden;
+    font-family: "Courier New", monospace;
+    background: #888;
+}
+
+/* Back link */
+.back-link {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    font-size: 20px;
+    color: black;
+    text-decoration: none;
+    z-index: 100;
+    padding: 4px 10px;
+    background: white;
+    border: 2px solid #000;
+}
+
+/* Tools Panel */
+#tools {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: #f4f4f4;
+    border: 3px solid #000;
+    padding: 10px;
+    z-index: 100;
+}
+
+#tools label {
+    margin-right: 5px;
+}
+
+/* Fullscreen drawing canvas */
+#drawCanvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    cursor: crosshair;
+    z-index: 10;
+}
+
+/* CRT canvas behind everything */
+#crtCanvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 0;
+    pointer-events: none;
+}
+
+/* Omori GIF */
+#omori {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    height: 150px;
+    z-index: 20;
+}
+
+/* Speech bubble */
+.bubble {
+    position: absolute;
+    bottom: 150px;
+    right: 60px;
+    z-index: 50;
+    background: #ffffff;
+    padding: 14px 20px;
+    border-radius: 14px;
+    border: 3px solid #000000;
+    font-size: 16px;
+    max-width: 260px;
+    box-shadow: 3px 3px 0px #00000099;
+    line-height: 1.4;
+    pointer-events: none;
+    overflow: hidden;
+    white-space: pre-line;
+}
+
+.bubble:after {
+    content: "";
+    position: absolute;
+    bottom: -18px;
+    right: 40px;
+    width: 0;
+    height: 0;
+    border-left: 14px solid transparent;
+    border-right: 14px solid transparent;
+    border-top: 18px solid #ffffff;
+    filter: drop-shadow(2px 2px 0px #00000099);
+}
+
+/* Floating pixel hearts */
+.heart {
+    position: fixed;
+    font-size: 14px;
+    color: #000000;
+    animation: floatUp 3s linear forwards;
+    pointer-events: none;
+    opacity: 0;
+    text-shadow: 1px 1px #000;
+}
+
+@keyframes floatUp {
+    0%   { transform: translateY(20px); opacity: 0; }
+    20%  { opacity: 1; }
+    100% { transform: translateY(-80px); opacity: 0; }
+}
+
+
+/* Omori container box */
+.omori-box {
+    position: fixed;       /* stick to screen corner */
+    bottom: 20px;
+    right: 20px;
+    background: white;     /* white box */
+    border: 3px solid black;
+    padding: 0px;
+    border-radius: 8px;
+    display: inline-block;
+    z-index: 10;
+}
+
+/* Omori GIF inside the box */
+.omori-box img {
+    display: block;
+    width: 120px;          /* adjust as needed */
+    height: auto;
+    image-rendering: pixelated;
+}
+
+
+</style>
+</head>
+<body>
+
+<a class="back-link" href="/index.html">&lt;&lt; Back</a>
+
+<div id="tools">
+    <label>Brush Color:</label>
+    <input type="color" id="colorPicker" value="#000000">
+    <label>Size:</label>
+    <input type="number" id="sizePicker" value="4" min="1" max="30" style="width:50px;">
+    <button id="eraser">Eraser</button>
+    <button id="clear">Clear</button>
+    <button id="save">Save</button>
+</div>
+
+<canvas id="drawCanvas"></canvas>
+<canvas id="crtCanvas"></canvas>
+
+<div class="omori-box">
+    <img src="images/omori.gif" alt="Omori" class="omori">
+</div>
+
+<div class="bubble" id="bubbleText"></div>
+
+<script>
+// -------------------------
+// DRAWING
+// -------------------------
+const canvas = document.getElementById("drawCanvas");
+const ctx = canvas.getContext("2d");
+
+function resizeCanvas() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+}
+window.addEventListener('resize', resizeCanvas);
+resizeCanvas();
+
+let drawing = false;
+let brushColor = "#000000";
+let brushSize = 4;
+let erasing = false;
+
+canvas.addEventListener("mousedown", () => drawing = true);
+canvas.addEventListener("mouseup", () => drawing = false);
+canvas.addEventListener("mouseleave", () => drawing = false);
+canvas.addEventListener("mousemove", draw);
+
+function draw(e) {
+    if (!drawing) return;
+    ctx.fillStyle = erasing ? "#fff" : brushColor;
+    ctx.beginPath();
+    ctx.arc(e.clientX, e.clientY, brushSize, 0, Math.PI*2);
+    ctx.fill();
+}
+
+// Tools
+document.getElementById("colorPicker").addEventListener("input", e => { brushColor = e.target.value; erasing = false; });
+document.getElementById("sizePicker").addEventListener("input", e => { brushSize = e.target.value; });
+document.getElementById("eraser").addEventListener("click", () => { erasing = true; });
+document.getElementById("clear").addEventListener("click", () => { ctx.clearRect(0,0,canvas.width,canvas.height); });
+document.getElementById("save").addEventListener("click", () => {
+    const link = document.createElement("a");
+    link.download = "drawing.png";
+    link.href = canvas.toDataURL();
+    link.click();
+});
+
+// -------------------------
+// JRPG TYPING TEXT
+// -------------------------
+const bubble = document.getElementById("bubbleText");
+const message = `You found my secret site wooo...
+dont expect the drawing capability here to be insane tho....`;
+let i = 0;
+function typeText() {
+    if (i < message.length) {
+        bubble.textContent += message[i];
+        i++;
+        setTimeout(typeText, 35);
+    }
+}
+typeText();
+
+// -------------------------
+// FLOATING PIXEL HEARTS
+// -------------------------
+function spawnHeart() {
+    const h = document.createElement("div");
+    h.className = "heart";
+    h.textContent = "❤";
+    const ox = window.innerWidth - 120;
+    const oy = window.innerHeight - 90;
+    h.style.left = (ox + Math.random()*40 - 20) + "px";
+    h.style.top = (oy + Math.random()*20 - 10) + "px";
+    document.body.appendChild(h);
+    setTimeout(() => h.remove(), 3000);
+}
+setInterval(spawnHeart, 600);
+
+// -------------------------
+// CRT EFFECT
+// -------------------------
+const crt = document.getElementById('crtCanvas');
+const cctx = crt.getContext('2d');
+
+function resizeCRT() {
+    crt.width = window.innerWidth;
+    crt.height = window.innerHeight;
+}
+window.addEventListener('resize', resizeCRT);
+resizeCRT();
+
+function drawCRT() {
+    cctx.clearRect(0, 0, crt.width, crt.height);
+
+    const imgData = cctx.createImageData(crt.width, crt.height);
+    const buffer = imgData.data;
+
+    for (let i = 0; i < buffer.length; i += 4) {
+        const v = Math.random() * 30;
+        buffer[i] = v;
+        buffer[i+1] = v;
+        buffer[i+2] = v;
+        buffer[i+3] = 20;
+    }
+    cctx.putImageData(imgData, 0, 0);
+
+    // Scanlines
+    cctx.fillStyle = 'rgba(0,0,0,0.05)';
+    for (let y = 0; y < crt.height; y += 3) {
+        cctx.fillRect(0, y, crt.width, 1);
+    }
+
+    requestAnimationFrame(drawCRT);
+}
+drawCRT();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Goodbye!</title>
+
+<style>
+    body {
+        margin: 0;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: #111;
+        font-family: "Courier New", monospace;
+        overflow: hidden;
+        color: #0f0;
+    }
+
+    #message {
+        font-size: 48px;
+        text-align: center;
+        opacity: 0;
+        white-space: pre-line;
+        animation: fadeInOut 3s forwards;
+        z-index: 2;
+        text-shadow: 0 0 2px #0f0, 0 0 4px #0f0, 0 0 6px #0f0;
+    }
+
+    #crtCanvas {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        pointer-events: none;
+        z-index: 1;
+    }
+
+    @keyframes fadeInOut {
+        0% { opacity: 0; }
+        20% { opacity: 1; }
+        80% { opacity: 1; }
+        100% { opacity: 0; }
+    }
+</style>
+</head>
+<body>
+
+<div id="message">Bye bye ~(‾▿‾)~</div>
+<canvas id="crtCanvas"></canvas>
+
+<script>
+// -------------------------
+// CRT static effect
+// -------------------------
+const crt = document.getElementById('crtCanvas');
+const ctx = crt.getContext('2d');
+
+function resizeCRT() {
+    crt.width = window.innerWidth;
+    crt.height = window.innerHeight;
+}
+window.addEventListener('resize', resizeCRT);
+resizeCRT();
+
+function drawCRT() {
+    ctx.clearRect(0, 0, crt.width, crt.height);
+
+    const imgData = ctx.createImageData(crt.width, crt.height);
+    const buffer = imgData.data;
+
+    for (let i = 0; i < buffer.length; i += 4) {
+        let flicker = Math.random() * 40;
+        buffer[i]   = flicker + Math.random() * 20;
+        buffer[i+1] = flicker;
+        buffer[i+2] = flicker + Math.random() * 30;
+        buffer[i+3] = 30;
+    }
+    ctx.putImageData(imgData, 0, 0);
+
+    ctx.fillStyle = 'rgba(0,255,0,0.03)';
+    for (let y = 0; y < crt.height; y += 3) {
+        ctx.fillRect(0, y, crt.width, 1);
+    }
+
+    if (Math.random() < 0.1) {
+        ctx.fillStyle = 'rgba(0,255,0,0.15)';
+        let lineHeight = Math.random() * 8 + 1;
+        let y = Math.random() * crt.height;
+        ctx.fillRect(0, y, crt.width, lineHeight);
+    }
+
+    requestAnimationFrame(drawCRT);
+}
+drawCRT();
+
+
+// -------------------------
+// Close window after 3 seconds
+// -------------------------
+setTimeout(() => {
+    window.close();
+}, 3000);
+</script>
+
+</body>
+</html>
