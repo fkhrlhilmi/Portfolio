@@ -6,26 +6,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Resume ~ Fakhrul Hilmi</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
 </head>
 
 <body>
 <div class="crt">
     <div class="bg-loop">
-        <img src="images/sitebg2.png" alt="BG">
-        <img src="images/sitebg2.png" alt="BG copy">
+        <img src="images/sitebg1.gif" alt= BG>
+        <img src="images/sitebg1.gif" alt="BG copy">
     </div>
 
     <div class="crt-overlay"></div>
 
-    <div class="page-wrapper">
 
+	<div class="page-wrapper-top">
         <nav class="nav-bar">
             <a href="index.html" target="_self">Home</a>
             <a href="#about">About Me</a>
-            <a href="#projects">My Projects</a>
+            <a href="index.html#projects">My Projects</a>
             <a href="#contact">Contact Me</a>
             <a href="resume.html">Resume</a>
         </nav>
+        
 
         <div class="window">
             <div class="window-title">
@@ -36,9 +39,14 @@
             <div class="window-content">
                 <div style="text-align: center; margin-bottom: 1rem;">
                     <h1>Fakhrul Hilmi Bin Azman</h1>
-                    <p>Diploma in Computer Science, Universiti Teknologi MARA Melaka</p>
+                    <p>Diploma in Computer Science, Universiti Teknologi Malaysia</p>
                     <p>Email: <a href="mailto:fakhrulhilmi199@gmail.com">fakhrulhilmi199@gmail.com</a></p>
                 </div>
+
+                <section id="download" style="text-align:center; margin-top:1rem;">
+                    <a href="images/RESUME FAKHRUL HILMI BIN AZMAN.pdf" download class="download-button">📄 Download PDF Resume</a>
+                </section>
+
 
                 <section id="about">
                     <h2 class="header2">* Profile</h2>
@@ -62,51 +70,77 @@
                     </div>
                 </section>
 
-                <section id="skills">
-                    <h2 class="header2">* Skills & Proficiencies</h2>
-                    <div class="scroll-box">
-                        <p><strong>Programming Languages:</strong> C, C++, Python, Java, JavaScript, VB.NET, PHP, HTML, CSS</p>
-                        <p><strong>Software & Tools:</strong> Visual Studio 2022, Visual Studio Code, Embarcadero Dev-C++, Android Studio, XAMPP, MySQL, Apache NetBeans, IntelliJ IDEA, Oracle VirtualBox, Git Bash, GameMaker Studio, CLIPStudio Paint, Microsoft Excel</p>
-                        <p><strong>Web & Mobile Development:</strong> Responsive Web Design, Front-end Layouts (Flexbox, Grid), Android Penetration Testing, Mobile App Security Principles</p>
-                        <p><strong>Hardware & Technical Skills:</strong> Laptop, PC, Printer, Drawing Tablet, Computer Maintenance</p>
-                        <p><strong>Strengths:</strong> Strong analytical and problem-solving skills, quick learner of new technologies, effective communicator in team environments, proactive attitude toward learning and improvement</p>
+                <section class="skills" id="skills">
+                <div class="content">
+                    <div class="title">
+                        <h2 class="header2">* My Skills & Proficiencies</h2>
                     </div>
-                </section>
 
+                    <!-- Icon Boxes -->
+                    <div class="skills-icons">
+                    <div class="box">
+                        <div class="icon"><i class="fab fa-html5"></i></div>
+                        <h3>HTML</h3>
+                    </div>
+                    <div class="box">
+                        <div class="icon"><i class="fab fa-js-square"></i></div>
+                        <h3>JavaScript</h3>
+                    </div>
+                    <div class="box">
+                        <div class="icon"><i class="fab fa-css3-alt"></i></div>
+                        <h3>CSS</h3>
+                    </div>
+                    <div class="box">
+                        <div class="icon"><i class="fas fa-code"></i></div>
+                        <h3>C++</h3>
+                    </div>
+                    <div class="box">
+                        <div class="icon"><i class="fas fa-laptop-code"></i></div>
+                        <h3>VB.Net</h3>
+                    </div>
+                    <div class="box">
+                        <div class="icon"><i class="fab fa-python"></i></div>
+                        <h3>Python</h3>
+                    </div>
+                    <div class="box">
+                        <div class="icon"><i class="fab fa-android"></i></div>
+                        <h3>Android Studio</h3>
+                    </div>
+                    <div class="box">
+                        <div class="icon"><i class="fab fa-java"></i></div>
+                        <h3>Java</h3>
+                    </div>
+                    <div class="box">
+                        <div class="icon"><i class="fab fa-php"></i></div>
+                        <h3>PHP</h3>
+                    </div>
+                    <div class="box">
+                        <div class="icon"><i class="fab fa-git-alt"></i></div>
+                        <h3>Git</h3>
+                    </div>
+                    <div class="box">
+                        <div class="icon"><i class="fas fa-database"></i></div>
+                        <h3>MySQL / Database</h3>
+                    </div>
+                    <div class="box">
+                        <div class="icon"><i class="fab fa-node-js"></i></div>
+                        <h3>Node.js</h3>
+                    </div>
+                    </div>
 
-                <section id="projects">
-                    <h2 class="header2">* Projects</h2>
-                <div class="scrollbox-projects">
-                    <div class="projects-section">
-                        <!-- Left: Computer Security -->
-                        <div class="project-card">
-                          <h3>Course work Project</h3>
-                            <div class="project-image">
-                                <img src="images/RSAalgo.png" alt="RSA algorythm">
-                            </div>
-                            <div class="project-text">
-                                <h3>Computer Security Project</h3>
-                                <p>Build up an encryption method using the Rivest-Shamir-Adleman (RSA) Method, Developed in python</p>
-                            </div>
-                        </div>
-
-
-                        <!-- Right: Side Project -->
-                        <div class="project-card">
-                            <h3>Side Projects</h3>
-                            <div class="project-image">
-                                <img src="images/indieweb.gif" alt="Side Project">
-                            </div>
-                            <div class="project-text">
-                                <h3>Indie-web</h3>
-                                <p>Building an indie-web where I update daily with personal projects and other stuff. Developed in HTML, CSS, and JavaScript. Currently a work in progress.</p>
-                            </div>
-                        </div>
-
-
+                    <!-- Scrollable Details -->
+                    <div class="scroll-box">
+                    <p><strong>Programming Languages:</strong> C, C++, Python, Java, JavaScript, VB.NET, PHP, HTML, CSS</p>
+                    <p><strong>Software & Tools:</strong> Visual Studio 2022, VS Code, Dev-C++, Android Studio, XAMPP, MySQL, NetBeans, IntelliJ IDEA, Oracle VirtualBox, Git Bash, GameMaker Studio, CLIPStudio Paint, Microsoft Excel</p>
+                    <p><strong>Web & Mobile Development:</strong> Responsive Web Design, Front-end Layouts (Flexbox, Grid), Android Penetration Testing, Mobile App Security Principles</p>
+                    <p><strong>Hardware & Technical Skills:</strong> Laptop, PC, Printer, Drawing Tablet, Computer Maintenance</p>
+                    <p><strong>Strengths:</strong> Strong analytical and problem-solving skills, quick learner of new technologies, effective communicator in team environments, proactive attitude toward learning and improvement</p>
                     </div>
                 </div>
                 </section>
+
+
+
 
                 <section id="languages">
                     <h2 class="header2">* Languages</h2>
@@ -122,10 +156,6 @@
                         <p>GitHub: <a href="https://github.com/fkhrlhilmi">https://github.com/fkhrlhilmi</a></p>
                         <p>LinkedIn: <a href="https://www.linkedin.com/in/fakhrul-hilmi/">https://www.linkedin.com/in/fakhrul-hilmi/</a></p>
                     </div>
-                </section>
-
-                <section id="download" style="text-align:center; margin-top:1rem;">
-                    <a href="images/RESUME FAKHRUL HILMI BIN AZMAN.pdf" download class="download-button">📄 Download PDF Resume</a>
                 </section>
 
             </div> <!-- window-content -->
